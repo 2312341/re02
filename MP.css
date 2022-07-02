@@ -1,0 +1,101 @@
+:root {
+  /* 声明全区变量选择器 ：root:文档的背景色 */
+  --background: #e1e1e1;
+  --color-light: rgb(82, 82, 82);
+  --color-dark: rgb(128, 128, 128);
+  --text-color-light: #888;
+}
+body {
+  background-color: var(--background);
+  /* var:函数在样式表中插入该自定义属性的值： */
+  overflow: hidden; /* overflow 溢出元素内容区域的部分内容应该如何处理 hidden（不可见的） */
+  font-family: sans-serif; /*  font-family:指定段落字体 */
+}
+.alignment {
+  /* .alignment：排成直线 */
+  display: flex;
+  flex-direction: column; /* flex-direction:以相反的顺序设置 <div> 元素内的弹性项目的方向 column 作为列，垂直地显示弹性项目。 */
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  /* 卡片 */
+  perspective: 1000px; /* perspective:设置元素被查看位置的视图： */
+  margin: 5% auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card .inner {
+  /* 卡片内部 */
+  position: relative; /* position 属性指定了元素的定位类型。 relative定位 ：相对定位元素的定位是相对其正常位置。 */
+  width: 300px;
+  height: 320px;
+}
+.front,
+.back {
+  position: absolute; /*  position 属性指定了元素的定位类型。absolute 绝对定位的元素的位置相对于最近的已定位父元素*/
+  top: 0;
+  left: 0;
+  overflow: hidden; /* overflow 属性规定当内容溢出元素框时发生的事情。hidden 内容会被修剪，并且其余内容是不可见的。 */
+  height: 100%;
+  color: var(--text-color-light);
+  border-radius: 25px; /* border-radius:添加圆角边框 */
+  box-shadow: 0 0 50px 2px rgba(0, 0, 0, 0.1);
+  background: url("./email-pattern.png") 0 0 repeat; /* 插入背景图片 */
+}
+/* 隐藏未旋转过来的背景图片 */
+.back {
+  backface-visibility: hidden; /* backface-visibility:隐藏被旋转的div元素的背面 hidden	背面是不可见的。 */
+}
+.avatar {
+  position: absolute;
+  width: 6em; /* 相对长度单位，相对于当前对象内文本的字体尺寸 1em=16px */
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* transform:：旋转 div 元素： translate(x,y)定义 2D 转换。 */
+  border-radius: 50%; /* 圆角边框 */
+  border: 5px solid var(--background);
+}
+.banner + .profile {
+  height: 50%;
+  margin-top: -10px;
+}
+.title,
+.subtitle,
+.text,
+.address {
+  margin-top: 0;
+  margin-bottom: 0;
+  text-align: center;
+}
+.subtitle,
+.address {
+  font-size: 0.8em;
+  font-weight: 400;
+  /* text-transform: uppercase; */
+}
+.text {
+  margin: 30% 8% 0 8%;
+  padding: auto;
+}
+address::before {
+  content: "";
+  display: inline-block; /* 保留上下外边距/内边距 */
+  border-top: 2px solid var(--text-color-light); /* border：设置边框 */
+  width: 100%;
+  margin-bottom: 5px;
+}
+.back {
+  transform: rotateY(180deg);
+  /*  transform ：旋转 div 元素： rotateY：可以让一个元素围绕纵坐标 (垂直轴) 旋转，而不会对其进行变形。 */
+}
+.card:hover .inner {
+  transform: rotateY(180deg);
+}
+.inner {
+  transition: transform 0.5s ease-in-out;
+  /* ease-in-out：以慢速开始和结束的过渡效果 */
+  transform-style: preserve-3d;
+}
